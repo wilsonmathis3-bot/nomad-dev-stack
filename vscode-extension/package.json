@@ -1,0 +1,137 @@
+{
+  "name": "nomad-jarvis",
+  "displayName": "Nomad Jarvis",
+  "description": "Your AI assistant inside VS Code — connects to OpenClaw",
+  "version": "0.1.0",
+  "publisher": "nomadstack",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Chat",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:nomadJarvis.openChat"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "nomadJarvis.openChat",
+        "title": "Open Jarvis Chat",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "nomadJarvis.askAboutSelection",
+        "title": "Ask Jarvis about selection"
+      },
+      {
+        "command": "nomadJarvis.explainCode",
+        "title": "Jarvis: Explain this code"
+      },
+      {
+        "command": "nomadJarvis.reviewCode",
+        "title": "Jarvis: Review this code"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "nomadJarvis.askAboutSelection",
+          "group": "jarvis@1",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "nomadJarvis.explainCode",
+          "group": "jarvis@2",
+          "when": "editorHasSelection"
+        },
+        {
+          "command": "nomadJarvis.reviewCode",
+          "group": "jarvis@3",
+          "when": "editorHasSelection"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "nomadJarvis.openChat",
+          "group": "navigation",
+          "when": "view == nomadJarvis.chat"
+        }
+      ]
+    },
+    "views": {
+      "explorer": [
+        {
+          "id": "nomadJarvis.chat",
+          "name": "Jarvis",
+          "icon": "$(comment-discussion)",
+          "contextualTitle": "Jarvis Chat"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "nomadJarvis",
+          "title": "Jarvis",
+          "icon": "$(comment-discussion)"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Nomad Jarvis",
+      "properties": {
+        "nomadJarvis.apiUrl": {
+          "type": "string",
+          "default": "https://openrouter.ai/api/v1/chat/completions",
+          "description": "API endpoint URL (OpenRouter recommended: https://openrouter.ai/api/v1/chat/completions)"
+        },
+        "nomadJarvis.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API key (OpenRouter: sk-or-v1-...)"
+        },
+        "nomadJarvis.model": {
+          "type": "string",
+          "default": "kimi/k2p6",
+          "description": "Model to use for chat"
+        },
+        "nomadJarvis.includeOpenFiles": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include open file content as context"
+        },
+        "nomadJarvis.maxContextLines": {
+          "type": "number",
+          "default": 100,
+          "description": "Maximum lines of context to send from open files"
+        }
+      }
+    },
+    "keybindings": [
+      {
+        "command": "nomadJarvis.openChat",
+        "key": "ctrl+shift+j",
+        "mac": "cmd+shift+j",
+        "when": "editorTextFocus"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.74.0",
+    "@types/node": "16.x",
+    "typescript": "^4.9.4",
+    "eslint": "^8.28.0",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0"
+  }
+}

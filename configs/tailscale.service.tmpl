@@ -1,0 +1,29 @@
+# Nomad Dev Stack — Tailscale systemd service (fallback)
+# Only needed if your distro doesn't provide a tailscaled service.
+# Most users should use the official tailscale package instead.
+
+[Unit]
+Description=Tailscale node agent
+Documentation=https://tailscale.com/kb/
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStartPre=/usr/bin/tailscale up --authkey={{AUTH_KEY}} --hostname={{HOSTNAME}} --reset
+ExecStart=/usr/sbin/tailscaled --state=/var/lib/tailscale/tailscaled.state --socket=/run/tailscale/tailscaled.sock
+ExecStopPost=/usr/bin/tailscale down
+Restart=on-failure
+RestartSec=5
+
+# Security
+LockPersonality=true
+MemoryDenyWriteExecute=true
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectHome=read-only
+ProtectSystem=strict
+RestrictSUIDSGID=true
+
+[Install]
+WantedBy=multi-user.target

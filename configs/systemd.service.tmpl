@@ -1,0 +1,40 @@
+[Unit]
+Description=Nomad Dev Stack — code-server ({{EDITOR}})
+Documentation=https://github.com/yourusername/nomad-dev-stack
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User={{USER}}
+Group={{USER}}
+
+# Main process
+ExecStart=/usr/bin/code-server --bind-addr {{BIND_ADDR}} --config {{CONFIG_PATH}}
+
+# Working directory
+WorkingDirectory={{WORKSPACE_PATH}}
+
+# Restart policy
+Restart=on-failure
+RestartSec=5
+StartLimitInterval=60s
+StartLimitBurst=3
+
+# Security hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=read-only
+ReadWritePaths={{WORKSPACE_PATH}} {{USER_DATA_DIR}}
+
+# Environment
+Environment="HOME={{HOME}}"
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=nomad-dev-stack
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,60 @@
+{
+    // Nomad Dev Stack — VS Code settings optimized for remote/cloud development
+    // Place this in ~/.local/share/code-server/User/settings.json (or ~/.vscode-server/data/User/settings.json)
+    
+    // ── Editor ─────────────────────────────────────────────────
+    "editor.fontSize": 14,
+    "editor.fontFamily": "'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace",
+    "editor.fontLigatures": true,
+    "editor.lineHeight": 1.6,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.wordWrap": "on",
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "boundary",
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    
+    // ── Auto-save ──────────────────────────────────────────────
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1000,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    
+    // ── Terminal ───────────────────────────────────────────────
+    "terminal.integrated.defaultProfile.linux": "bash",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.cursorStyle": "line",
+    "terminal.integrated.scrollback": 10000,
+    
+    // ── Git ────────────────────────────────────────────────────
+    "git.enableSmartCommit": true,
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "git.decorations.enabled": true,
+    
+    // ── Remote Development ─────────────────────────────────────
+    "remote.SSH.useLocalServer": false,
+    "remote.SSH.showLoginTerminal": true,
+    
+    // ── Performance ────────────────────────────────────────────
+    "editor.maxTokenizationLineLength": 20000,
+    "typescript.tsserver.maxTsServerMemory": 4096,
+    
+    // ── Theme ──────────────────────────────────────────────────
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.tree.indent": 20,
+    
+    // ── Recommended Extensions ─────────────────────────────────
+    // Install these for the full Nomad experience:
+    // - ms-vscode-remote.remote-ssh
+    // - GitHub.copilot
+    // - eamodio.gitlens
+    // - esbenp.prettier-vscode
+    // - dbaeumer.vscode-eslint
+    // - streetsidesoftware.code-spell-checker
+    // - formulahendry.auto-close-tag
+    // - PKief.material-icon-theme
+    // - zhuangtongfa.material-theme
+}

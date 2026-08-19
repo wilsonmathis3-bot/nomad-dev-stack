@@ -1,0 +1,25 @@
+# Nomad Dev Stack — Cloudflare Tunnel configuration
+# Use this if you prefer Cloudflare Tunnel over Tailscale.
+# Requires: cloudflared installed and a Cloudflare account.
+
+# Tunnel UUID (generate with: cloudflared tunnel create nomad-dev)
+tunnel: {{TUNNEL_ID}}
+
+# Credentials file path
+credentials-file: {{CREDENTIALS_FILE}}
+
+# Ingress rules — route traffic to your code-server
+ingress:
+  # Match your domain (replace with your actual domain)
+  - hostname: nomad.yourdomain.com
+    service: http://localhost:{{UPSTREAM_PORT}}
+  
+  # Fallback — catch-all
+  - service: http_status:404
+
+# Logging
+logfile: /var/log/cloudflared.log
+loglevel: info
+
+# Transport
+protocol: quic
