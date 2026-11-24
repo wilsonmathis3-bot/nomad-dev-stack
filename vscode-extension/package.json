@@ -1,11 +1,11 @@
 {
   "name": "nomad-jarvis",
   "displayName": "Nomad Jarvis",
-  "description": "Your AI assistant inside VS Code — connects to OpenClaw",
+  "description": "Your AI assistant inside VS Code \u2014 connects to OpenClaw",
   "version": "0.1.0",
   "publisher": "nomadstack",
   "engines": {
-    "vscode": "^1.74.0"
+    "vscode": "^1.82.0"
   },
   "categories": [
     "Machine Learning",
@@ -65,6 +65,7 @@
     "views": {
       "explorer": [
         {
+          "type": "webview",
           "id": "nomadJarvis.chat",
           "name": "Jarvis",
           "icon": "$(comment-discussion)",
@@ -127,8 +128,8 @@
     "lint": "eslint src --ext ts"
   },
   "devDependencies": {
-    "@types/vscode": "^1.74.0",
-    "@types/node": "16.x",
+    "@types/vscode": "^1.82.0",
+    "@types/node": "18.x",
     "typescript": "^4.9.4",
     "eslint": "^8.28.0",
     "@typescript-eslint/eslint-plugin": "^5.45.0",

@@ -115,15 +115,20 @@ export class JarvisWebviewProvider implements vscode.WebviewViewProvider {
 
             let fullResponse = '';
             const decoder = new TextDecoder();
+            // SSE events can be split across network chunks; keep the trailing
+            // partial line in a buffer instead of dropping it.
+            let buffer = '';
 
             while (true) {
                 const { done, value } = await reader.read();
                 if (done) break;
 
-                const chunk = decoder.decode(value);
-                const lines = chunk.split('\n');
+                buffer += decoder.decode(value, { stream: true });
+                const lines = buffer.split('\n');
+                buffer = lines.pop() ?? '';
 
-                for (const line of lines) {
+                for (const rawLine of lines) {
+                    const line = rawLine.replace(/\r$/, '');
                     if (line.startsWith('data: ')) {
                         const data = line.slice(6);
                         if (data === '[DONE]') continue;

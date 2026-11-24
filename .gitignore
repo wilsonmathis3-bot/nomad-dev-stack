@@ -1,0 +1,12 @@
+# VS Code extension build output
+vscode-extension/node_modules/
+vscode-extension/out/
+*.vsix
+
+# Local secrets / generated config
+.env
+configs/.env
+
+# OS / editor
+.DS_Store
+.idea/
